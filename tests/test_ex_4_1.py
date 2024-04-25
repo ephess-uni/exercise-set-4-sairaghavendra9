@@ -7,7 +7,7 @@ from textwrap import dedent
     'logfile,expected_length',
     [
         ('default_messages', 2),
-        ('test_messages', 1),
+        ('test_messages', 4),
     ]
 )
 def test___num_shutdowns___returns_correct_number_of_lines(logfile, expected_length, feedback, request):
