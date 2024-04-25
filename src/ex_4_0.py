@@ -9,6 +9,7 @@ FILENAME = get_data_file_path('messages.log')
 # >>>> DO NOT MODIFY CODE ABOVE <<<<
 
 
+import re
 def get_shutdown_events(logfile):
     shutdown_events = []
 
@@ -16,18 +17,20 @@ def get_shutdown_events(logfile):
     with open(logfile, 'r') as file:
         # Read each line in the file
         for line in file:
-            # Check if the line contains "Shutdown initiated."
-            if "Shutdown initiated." in line:
+            # Use regular expression to find shutdown events
+            if re.search(r'Shutdown initiated', line, re.IGNORECASE):
                 # Append the line to the shutdown_events list
                 shutdown_events.append(line.strip())
 
     return shutdown_events
 
-
-# >>>> The code below will call your function and print the results
+# The code below will call your function and print the results
 if __name__ == "__main__":
+    from util import get_data_file_path
+    
     FILENAME = get_data_file_path('messages.log')
     shutdown_events = get_shutdown_events(FILENAME)
+    
     if shutdown_events:
         print("Shutdown events found:")
         for event in shutdown_events:
